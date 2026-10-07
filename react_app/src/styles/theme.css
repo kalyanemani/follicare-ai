@@ -1,0 +1,95 @@
+:root {
+  --bg-primary: #0a130f;
+  --bg-secondary: #12211b;
+  --bg-card: rgba(18, 33, 27, 0.75);
+  --bg-card-hover: rgba(26, 48, 39, 0.9);
+  --bg-accent: rgba(52, 211, 153, 0.12);
+  --text-primary: #f0fdf4;
+  --text-secondary: #a7f3d0;
+  --text-muted: #6ee7b7;
+  --accent-color: #10b981;
+  --accent-hover: #059669;
+  --accent-glow: rgba(16, 185, 129, 0.35);
+  --border-color: rgba(52, 211, 153, 0.2);
+  --border-focus: #34d399;
+  --banner-bg: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+  --hero-bg: radial-gradient(circle at top right, rgba(16, 185, 129, 0.18), transparent 60%);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.15);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 0 35px rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="ruby-red"], [data-theme="crimson-red"] {
+  --bg-primary: #180507;
+  --bg-secondary: #2a0b10;
+  --bg-card: rgba(45, 12, 18, 0.8);
+  --bg-card-hover: rgba(65, 18, 27, 0.92);
+  --bg-accent: rgba(244, 63, 94, 0.15);
+  --text-primary: #fff1f2;
+  --text-secondary: #fecdd3;
+  --text-muted: #fda4af;
+  --accent-color: #e11d48;
+  --accent-hover: #be123c;
+  --accent-glow: rgba(225, 29, 72, 0.45);
+  --border-color: rgba(244, 63, 94, 0.25);
+  --border-focus: #fb7185;
+  --banner-bg: linear-gradient(135deg, #881337 0%, #9f1239 50%, #e11d48 100%);
+  --hero-bg: radial-gradient(circle at top right, rgba(225, 29, 72, 0.22), transparent 60%);
+}
+
+[data-theme="ocean-blue"] {
+  --bg-primary: #05101e;
+  --bg-secondary: #0b1d33;
+  --bg-card: rgba(15, 36, 64, 0.8);
+  --bg-card-hover: rgba(22, 53, 94, 0.92);
+  --bg-accent: rgba(56, 189, 248, 0.15);
+  --text-primary: #f0f9ff;
+  --text-secondary: #bae6fd;
+  --text-muted: #7dd3fc;
+  --accent-color: #0284c7;
+  --accent-hover: #0369a1;
+  --accent-glow: rgba(2, 132, 199, 0.45);
+  --border-color: rgba(56, 189, 248, 0.25);
+  --border-focus: #38bdf8;
+  --banner-bg: linear-gradient(135deg, #075985 0%, #0369a1 50%, #0284c7 100%);
+  --hero-bg: radial-gradient(circle at top right, rgba(2, 132, 199, 0.22), transparent 60%);
+}
+
+[data-theme="rose-luxury"] {
+  --bg-primary: #170912;
+  --bg-secondary: #271220;
+  --bg-card: rgba(43, 20, 35, 0.8);
+  --bg-card-hover: rgba(61, 28, 50, 0.92);
+  --bg-accent: rgba(244, 114, 182, 0.15);
+  --text-primary: #fdf2f8;
+  --text-secondary: #fbcfe8;
+  --text-muted: #f472b6;
+  --accent-color: #db2777;
+  --accent-hover: #be185d;
+  --accent-glow: rgba(219, 39, 119, 0.45);
+  --border-color: rgba(244, 114, 182, 0.25);
+  --border-focus: #f472b6;
+  --banner-bg: linear-gradient(135deg, #831843 0%, #9d174d 50%, #db2777 100%);
+  --hero-bg: radial-gradient(circle at top right, rgba(219, 39, 119, 0.22), transparent 60%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+// [Qwen 2.5 Coder Auto-Update]: Switched theme token to 'ruby-red' in CSS design system. (2026-10-07 09:04:26)

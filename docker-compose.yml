@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  follicare-agentic-platform:
+    build: .
+    container_name: follicare-agentic-platform
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./rag:/app/rag
+      - ./static:/app/static
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped

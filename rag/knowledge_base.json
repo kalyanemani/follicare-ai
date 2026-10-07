@@ -1,0 +1,107 @@
+[
+  {
+    "id": "policy_returns",
+    "category": "Policy",
+    "title": "FolliCare 100% Satisfaction & 60-Day Guarantee",
+    "content": "At FolliCare, we stand behind the scientific efficacy of our botanical hair cosmetics. We offer a 60-Day Money-Back Guarantee even on opened and partially used bottles. If you do not see visible improvements in your hair density, scalp comfort, or strand strength within 60 days of delivery, contact support for a prepaid return label and a 100% refund to your original payment method. No restocking fees.",
+    "keywords": ["return", "refund", "guarantee", "money back", "60 days", "exchange", "used bottle", "opened product", "satisfaction"]
+  },
+  {
+    "id": "policy_shipping",
+    "category": "Policy",
+    "title": "Shipping Rates, Eco Packaging & Dispatch",
+    "content": "Orders placed before 2:00 PM EST ship the same business day in 100% post-consumer recycled biodegradable glass and cardboard packaging. Standard Shipping (3-4 business days) is FREE on all orders over $40 (otherwise flat $4.99). Express 2-Day Priority is available for $9.99. International eco-shipping is offered to over 50 countries.",
+    "keywords": ["shipping", "delivery", "free shipping", "eco packaging", "tracking", "express", "international", "dispatch time", "rates"]
+  },
+  {
+    "id": "policy_safety_patch_test",
+    "category": "Policy",
+    "title": "Dermatological Safety, Patch Testing & Certifications",
+    "content": "All FolliCare cosmetics are clinically tested by board-certified dermatologists, 100% vegan, Leaping Bunny cruelty-free certified, and free of sulfates (SLS/SLES), parabens, phthalates, synthetic dyes, and formaldehyde-releasing agents. We recommend performing a 24-hour patch test on the inner forearm or behind the ear prior to first full scalp application.",
+    "keywords": ["safety", "patch test", "dermatologist", "vegan", "cruelty-free", "sulfate free", "paraben free", "clean beauty", "sensitive scalp", "hypoallergenic"]
+  },
+  {
+    "id": "policy_discounts_routine",
+    "category": "Policy",
+    "title": "Cosmetics Promo Codes & Auto-Delivery Subscriptions",
+    "content": "Use promo code 'GROWTH25' for 25% off all scalp density serums and treatments during seasonal wellness events. New customers can apply code 'HAIR15' for 15% off their first order. Subscribe & Save automatically provides 15% off + free shipping on every recurring 30, 60, or 90 day delivery schedule, with pause and cancel anytime flexibility.",
+    "keywords": ["discount", "coupon", "promo code", "voucher", "growth25", "hair15", "subscribe and save", "subscription", "auto delivery", "sale"]
+  },
+  {
+    "id": "guide_hair_thinning_routine",
+    "category": "Hair_Concern_Guide",
+    "title": "Trichology Protocol for Hair Fall & Crown Thinning",
+    "content": "For excessive shedding and sparse hairlines, trichologists recommend a synergistic 3-step regimen: 1. Morning: Apply Rosemary & Biotin Scalp Density Serum to stimulate microcirculation and deliver copper peptides. 2. Night: Apply Overnight Follicle Cellular Renewal Elixir containing 3% Redensyl to activate stem cells during sleep. 3. Weekly: Exfoliate with Salicylic Acid Scalp Detox Scrub to unclog sebum plugs around hair follicles.",
+    "keywords": ["thinning", "hair fall", "shedding", "hair growth", "alopecia", "regrowth", "rosemary", "redensyl", "biotin", "routine", "protocol"]
+  },
+  {
+    "id": "guide_damaged_bleached_hair",
+    "category": "Hair_Concern_Guide",
+    "title": "Bond Repair Protocol for Bleached & Heat-Damaged Strands",
+    "content": "To reverse chemical bleach damage and thermal heat brittleness: 1. Wash with Hydrolyzed Keratin & Argan Repair Shampoo to cleanse gently without stripping natural lipids. 2. Treat with Biomimetic Peptide Deep Restorative Mask for 8-10 minutes twice weekly to rebuild broken disulfide keratin bonds. 3. Before blow-drying or heat styling, mist with Thermal Defense Gloss Mist (protects up to 450°F).",
+    "keywords": ["bleach damage", "split ends", "heat damage", "keratin", "peptide", "bond repair", "dry hair", "brittle", "mask", "thermal defense"]
+  },
+  {
+    "id": "guide_dandruff_scalp_microbiome",
+    "category": "Hair_Concern_Guide",
+    "title": "Scalp Health, Flakes & Seborrheic Itch Protocol",
+    "content": "To eliminate persistent dandruff flakes and calm inflamed scalp: 1. Use Salicylic Acid & Tea Tree Scalp Detox Scrub 1-2 times per week to chemically dissolve dead keratinocytes and unclog follicle pores. 2. Follow with a gentle sulfate-free cleanser. 3. Avoid heavy occlusive petroleum waxes directly on the scalp which can feed Malassezia yeast.",
+    "keywords": ["dandruff", "flakes", "itchy scalp", "salicylic acid", "tea tree", "sebum", "microbiome", "scalp scrub", "oily roots"]
+  },
+  {
+    "id": "guide_curly_coily_cgm",
+    "category": "Hair_Concern_Guide",
+    "title": "Curly, Coily & Wavy (3A-4C) Moisture & Definition Guide",
+    "content": "For maximum curl elongation, zero frizz, and 5-day definition: 1. Cleanse with sulfate-free Keratin & Argan Shampoo to preserve natural sebum. 2. Deep condition with Biomimetic Peptide Mask using the 'squish to condish' method. 3. On soaking wet hair, apply Flaxseed & Coconut Moisture Curl Custard in sections to seal hydration and define curl clumps. Air dry or diffuse on low heat.",
+    "keywords": ["curly hair", "coily", "wavy", "3a", "3b", "3c", "4a", "4b", "4c", "curl custard", "flaxseed", "frizz free", "cgm", "curly girl method"]
+  },
+  {
+    "id": "ingredient_rosemary_science",
+    "category": "Ingredient_Science",
+    "title": "Active Ingredient Science: Rosemary Leaf Oil & Copper Peptides",
+    "content": "Clinical comparative studies published in peer-reviewed dermatology journals demonstrate that 3% Rosemary Leaf Oil exhibits efficacy comparable to 2% Minoxidil in improving hair count after 6 months, without scalp pruritus or rebound shedding. Copper Tripeptide-1 enlarges follicle size, stimulates collagen production, and enhances vascular endothelial growth factors (VEGF).",
+    "keywords": ["rosemary", "copper peptides", "minoxidil alternative", "science", "clinical trial", "follicle", "vegf", "growth factor"]
+  },
+  {
+    "id": "ingredient_redensyl_science",
+    "category": "Ingredient_Science",
+    "title": "Active Ingredient Science: Redensyl & Plant Stem Cells",
+    "content": "Redensyl is a patented galvanic synergy of DHQG (dihydroquercetin-glucoside) and EGCG-glucoside that targets the outer root sheath stem cells (ORSc) in the hair bulge. It reactivation-triggers the cellular switch from the telogen (resting) phase to the anagen (growth) phase, yielding up to 28,000 new hairs over 3 months of consistent night application.",
+    "keywords": ["redensyl", "stem cells", "anagen phase", "telogen effluvium", "active ingredient", "trichology", "hair count"]
+  },
+  {
+    "id": "ui_schema_capabilities",
+    "category": "UI_Schema",
+    "title": "FolliCare Multi-Agent Storefront UI Mutation Capabilities",
+    "content": "The UI Automation Agent executes real-time declarative UI actions on the storefront: 1. SET_THEME: change aesthetic theme ('botanical-emerald', 'rose-luxury', 'lavender-clean', 'amber-noir', 'light-minimal'). 2. SET_BANNER: update promo announcement bar (custom text, discount code, background gradient, timer). 3. UPDATE_HERO: customize campaign headline, subtitle, badge, and CTA. 4. FILTER_PRODUCTS: filter catalog by category, hair concern ('Hair Fall & Thinning', 'Damaged & Dry Hair', 'Dandruff & Oily Scalp', 'Frizz & Heat Protection', 'Curly, Coily & Wavy (3A-4C)', 'Color Care & Blonde Tone'), max_price, or search keyword. 5. ADD_PRODUCT: dynamically ingest and render newly created product card directly into the DOM grid. 6. ADD_TO_CART / APPLY_DISCOUNT: add items to cart with dynamic quantities. 7. LAUNCH_ROUTINE_BUILDER: open interactive diagnostic modal.",
+    "keywords": ["theme", "banner", "ui mutation", "filter", "add product", "routine builder", "cart", "discount", "dom automation", "agent commands"]
+  },
+  {
+    "id": "react_component_architecture",
+    "category": "React_UI_Schema",
+    "title": "FolliCare React Component Architecture & JSX Modular Tree",
+    "content": "The FolliCare frontend is designed as a modular React component tree: 1. <StorefrontContainer>: Root provider orchestrating themes and global agent state. 2. <TopNavigationBar>: Contains theme selector, search bar, active model dropdown, and sliding cart badge counter. 3. <HeroSection>: Campaign headline, trichological value props, and dynamic promotional banner. 4. <CatalogFilterBar>: Pill-based filters for Category, Hair Concern, and Sort order. 5. <ProductGrid>: Responsive grid rendering animated <ProductCard> components with active ingredients badges, clinical badges, price tags, and Add-to-Cart handlers. 6. <HairDiagnosticModal>: Multi-step interactive trichology quiz generating customized routines. 7. <CartDrawer>: Slide-out shopping bag managing quantities, promo discounts, subtotal, and checkout. 8. <FolliCareChatbot>: Docked bottom window with voice speech recognition, live agent spans, and multimodal upload.",
+    "keywords": ["react", "component architecture", "jsx", "product card", "navbar", "cart drawer", "chatbot", "ui modules", "react tree", "props"]
+  },
+  {
+    "id": "react_custom_hooks_and_state",
+    "category": "React_UI_Schema",
+    "title": "FolliCare React Custom Hooks: useFolliCareAgent & State Lifecycle",
+    "content": "React state lifecycle is managed via the custom hook 'useFolliCareAgent()': It exposes: { messages, isListening, isSpeaking, activeTheme, cart, agentTraces, activeMode, sendMessage, startListening, stopListening, switchTheme, executeDynamicAction, toggleMode }. When a user sends a voice or text command in Developer Mode or Customer Mode, useFolliCareAgent dispatches POST /api/chat with { message, input_type, mode, model_name }, receives declarative commands, and synchronizes React state automatically with zero UI flicker.",
+    "keywords": ["react hook", "useFolliCareAgent", "state management", "speech recognition", "agent lifecycle", "developer mode", "customer mode", "react state"]
+  },
+  {
+    "id": "react_css_tokens_and_glassmorphism",
+    "category": "React_UI_Schema",
+    "title": "FolliCare CSS Design Tokens, Theme Variables & Glassmorphism",
+    "content": "All UI elements utilize standardized CSS Custom Properties: --primary-color (emerald #10b981 / rose #f43f5e / lavender #8b5cf6 / amber #f59e0b), --bg-dark (#090d0b, #120b0f, #0d0b14, #0f0d09), --surface-card (rgba(255, 255, 255, 0.05)), --border-glass (rgba(16, 185, 129, 0.2)), --accent-glow (0 8px 32px rgba(16, 185, 129, 0.25)), --font-heading ('Playfair Display', serif), --font-sans ('Inter', sans-serif). UI Developer Mode can alter any CSS property dynamically using the SET_CUSTOM_CSS or UPDATE_THEME_TOKENS commands.",
+    "keywords": ["css tokens", "design system", "glassmorphism", "theme variables", "styling", "custom css", "ui developer", "tailwind", "responsive"]
+  },
+  {
+    "id": "developer_mode_mutation_protocol",
+    "category": "React_UI_Schema",
+    "title": "UI Developer Mode: Arbitrary Dynamic DOM & React Modification Protocol",
+    "content": "When operating in UI Developer Mode, the Multi-Agent framework handles arbitrary UI restructuring: 1. SET_CUSTOM_CSS: Injects custom CSS rules into document head. 2. INJECT_REACT_COMPONENT: Dynamically mounts interactive custom React/HTML elements (e.g., reviews carousel, live countdown, before/after slider). 3. MODIFY_LAYOUT: Alters grid layout columns, card padding, navbar heights, or banner placements. 4. EXECUTE_DYNAMIC_JS: Runs safe declarative DOM adjustments requested via voice or text.",
+    "keywords": ["developer mode", "ui developer", "arbitrary modification", "inject component", "modify layout", "custom css", "dynamic js", "agent mutation"]
+  }
+]

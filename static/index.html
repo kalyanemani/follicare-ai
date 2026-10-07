@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="botanical-emerald">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FolliCare Botanical Hair Cosmetics | Trichology AI & Storefront</title>
+  <meta name="description" content="Clinical-grade botanical hair cosmetics powered by local Multi-Agent AI, ChromaDB RAG, and MCP telemetry.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div id="announcement-banner">
+    <span>🌿 Clinical Botanical Formulation • 60-Day Satisfaction Guarantee</span>
+    <span class="code-tag">USE CODE: BOTANICAL20</span>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <a href="/" class="brand-logo">
+      <span class="leaf-icon">🌿</span>
+      <span>FolliCare <small style="font-size: 0.6em; color: var(--accent-color); font-weight: 700;">AI</small></span>
+    </a>
+
+    <div class="nav-actions">
+      <!-- Theme Switcher -->
+      <select id="theme-select" class="theme-select" aria-label="Select Storefront Aesthetic Theme">
+        <option value="botanical-emerald">🌿 Botanical Emerald</option>
+        <option value="ruby-red">🔴 Velvet Ruby (Red)</option>
+        <option value="ocean-blue">🌊 Clinical Sapphire (Blue)</option>
+        <option value="rose-luxury">🌸 Rose Quartz (Pink)</option>
+        <option value="lavender-clean">💜 Botanical Lavender</option>
+        <option value="amber-noir">✨ Onyx & Gold</option>
+        <option value="light-minimal">⚪ Clinical Porcelain</option>
+      </select>
+
+      <button id="dev-mode-btn" class="btn-icon" onclick="toggleDevDrawer()" title="Open Multi-Agent Developer Mode & Telemetry Inspector">
+        <span>🛠️</span> Dev Mode <span id="dev-mode-badge" style="font-size: 0.7rem; background: var(--bg-accent); color: var(--accent-color); padding: 2px 6px; border-radius: var(--radius-full); margin-left: 4px; border: 1px solid var(--border-color);">OFF</span>
+      </button>
+
+      <button class="btn-icon" onclick="launchRoutineModal('Hair Fall & Thinning')">
+        <span>📋</span> Routine Builder
+      </button>
+
+      <button class="btn-icon" onclick="toggleCartDrawer()">
+        <span>🛍️</span> Bag (<span id="cart-count">0</span>)
+      </button>
+    </div>
+  </header>
+
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="hero-pill">
+        <span>✨ Powered by Local Ollama & Multi-Agent LangGraph</span>
+      </div>
+      <h1 id="hero-title">Botanical Precision. <span>Clinical Hair Density.</span></h1>
+      <p id="hero-subtitle">
+        Formulated with active peptides, cold-pressed botanical extracts, and clean biomimetic actives to restore scalp vitality.
+      </p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="launchRoutineModal('Hair Fall & Thinning')">
+          Get Custom Trichology Routine
+        </button>
+        <button class="btn-icon" onclick="toggleChat()">
+          💬 Consult AI Trichologist
+        </button>
+      </div>
+    </section>
+
+    <!-- Category Filter Bar -->
+    <section class="filter-bar">
+      <div class="filter-pills">
+        <button class="filter-btn active" onclick="loadProducts(null)">All Formulas</button>
+        <button class="filter-btn" onclick="loadProducts('Scalp Care')">Scalp Care</button>
+        <button class="filter-btn" onclick="loadProducts('Shampoo')">Shampoo & Cleansers</button>
+        <button class="filter-btn" onclick="loadProducts('Treatments')">Treatments & Masks</button>
+        <button class="filter-btn" onclick="loadProducts('Hair Fall')">Hair Fall & Density</button>
+        <button class="filter-btn" onclick="loadProducts('Dandruff')">Dandruff & Flakes</button>
+      </div>
+    </section>
+
+    <!-- Product Grid -->
+    <section id="product-grid" class="product-grid">
+      <!-- Dynamically populated via loadProducts() -->
+    </section>
+  </main>
+
+  <!-- Cart Drawer -->
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="cart-header">
+      <h2 style="font-size: 1.2rem; font-weight: 800;">🛍️ Your Shopping Bag</h2>
+      <button style="background: transparent; border: none; font-size: 1.4rem; color: var(--text-primary); cursor: pointer;" onclick="toggleCartDrawer()">✕</button>
+    </div>
+    <div id="cart-items" class="cart-items-container">
+      <div style="text-align: center; color: var(--text-muted); padding: 30px;">Your shopping bag is empty.</div>
+    </div>
+    <div class="cart-footer">
+      <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; margin-bottom: 14px;">
+        <span>Subtotal:</span>
+        <span id="cart-subtotal" style="color: var(--accent-color);">$0.00</span>
+      </div>
+      <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="alert('Proceeding to FolliCare Secure Checkout!')">
+        Proceed to Checkout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Routine Recommendation Modal -->
+  <div id="routine-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 500; align-items: center; justify-content: center;">
+    <div style="background: var(--bg-secondary); border: 1px solid var(--border-focus); border-radius: var(--radius-lg); width: 540px; max-width: 90vw; padding: 28px; box-shadow: var(--shadow-lg); position: relative;">
+      <button style="position: absolute; top: 18px; right: 18px; background: transparent; border: none; color: var(--text-muted); font-size: 1.4rem; cursor: pointer;" onclick="closeRoutineModal()">✕</button>
+      <div id="routine-modal-content">
+        <!-- Dynamically injected -->
+      </div>
+      <div style="margin-top: 24px; text-align: right;">
+        <button class="btn-primary" onclick="closeRoutineModal()">Close Routine</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Developer Mode & Telemetry Drawer -->
+  <aside id="dev-drawer" class="dev-drawer">
+    <div class="dev-header">
+      <div class="dev-header-title">
+        <span>🛠️</span>
+        <div>
+          <div>FolliCare Developer Hub</div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">Multi-Agent Graph & Telemetry Inspector</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <label class="dev-toggle-switch" title="Toggle Developer Mode Payload">
+          <input type="checkbox" id="dev-mode-checkbox" onchange="toggleDevModeState(this.checked)">
+          <span id="dev-mode-label">Dev Mode</span>
+        </label>
+        <button style="background: transparent; border: none; font-size: 1.3rem; color: var(--text-muted); cursor: pointer;" onclick="toggleDevDrawer()">✕</button>
+      </div>
+    </div>
+
+    <!-- Quick KPI Stats -->
+    <div class="dev-stats-grid">
+      <div class="dev-stat-card">
+        <div class="dev-stat-label">Latency</div>
+        <div id="stat-latency" class="dev-stat-val">-- ms</div>
+      </div>
+      <div class="dev-stat-card">
+        <div class="dev-stat-label">Throughput</div>
+        <div id="stat-throughput" class="dev-stat-val">-- tok/s</div>
+      </div>
+      <div class="dev-stat-card">
+        <div class="dev-stat-label">RAG Relevance</div>
+        <div id="stat-relevance" class="dev-stat-val">91.8%</div>
+      </div>
+      <div class="dev-stat-card">
+        <div class="dev-stat-label">RAG Faithfulness</div>
+        <div id="stat-faithfulness" class="dev-stat-val">96.5%</div>
+      </div>
+      <div class="dev-stat-card">
+        <div class="dev-stat-label">Reflect Loops</div>
+        <div id="stat-loops" class="dev-stat-val">0</div>
+      </div>
+      <div class="dev-stat-card">
+        <div class="dev-stat-label">Tool Accuracy</div>
+        <div id="stat-tool-acc" class="dev-stat-val">100%</div>
+      </div>
+    </div>
+
+    <!-- Dev Tabs -->
+    <div class="dev-tabs-bar">
+      <button class="dev-tab-btn active" onclick="switchDevTab('path')">⚡ LangGraph Path</button>
+      <button class="dev-tab-btn" onclick="switchDevTab('spans')">🔍 Spans & Tools</button>
+      <button class="dev-tab-btn" onclick="switchDevTab('mcp')">🔌 MCP Logs</button>
+      <button class="dev-tab-btn" onclick="switchDevTab('json')">{ } JSON</button>
+    </div>
+
+    <!-- Dev Body Content -->
+    <div id="dev-body" class="dev-body">
+      <!-- Tab 1: Path -->
+      <div id="tab-path" class="dev-tab-content">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 10px;">LANGGRAPH EXECUTION TRAVERSAL</div>
+        <div id="dev-path-chain" class="dev-node-chain">
+          <div class="dev-step-card">
+            <span class="dev-step-idx">1</span>
+            <span class="dev-step-name">START</span>
+            <span class="dev-badge success">READY</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-idx">2</span>
+            <span class="dev-step-name">supervisor_intent_node</span>
+            <span class="dev-badge info">ROUTER</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-idx">3</span>
+            <span class="dev-step-name">rag_trichology_node</span>
+            <span class="dev-badge info">CHROMA RAG</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-idx">4</span>
+            <span class="dev-step-name">ui_automation_node</span>
+            <span class="dev-badge info">DOM AGENT</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-idx">5</span>
+            <span class="dev-step-name">tool_validator_node</span>
+            <span class="dev-badge success">VERIFIED</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-idx">6</span>
+            <span class="dev-step-name">response_synthesis_node</span>
+            <span class="dev-badge info">OLLAMA</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-idx">7</span>
+            <span class="dev-step-name">hindsight_memory_node</span>
+            <span class="dev-badge info">MEMORY</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-idx">8</span>
+            <span class="dev-step-name">llm_judge_evaluator_node</span>
+            <span class="dev-badge success">PASSED</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-idx">9</span>
+            <span class="dev-step-name">END</span>
+            <span class="dev-badge success">DONE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Spans -->
+      <div id="tab-spans" class="dev-tab-content" style="display: none;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 10px;">RECENT TRACE SPANS</div>
+        <div id="dev-spans-container" style="display: flex; flex-direction: column; gap: 8px;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Tab 3: MCP Logs -->
+      <div id="tab-mcp" class="dev-tab-content" style="display: none;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 10px;">MCP JSON-RPC & GIT SYNC TELEMETRY</div>
+        <div id="dev-mcp-container" style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="dev-step-card">
+            <span class="dev-step-name">Server: follicare-cosmetics-mcp (v1.0.0)</span>
+            <span class="dev-badge success">CONNECTED</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-name">git_push_react_code -&gt; origin/main</span>
+            <span class="dev-badge info">MCP TOOL</span>
+          </div>
+          <div class="dev-step-card">
+            <span class="dev-step-name">recommend_hair_routine -&gt; 3-Step</span>
+            <span class="dev-badge success">ACCURACY 100%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: JSON Raw Inspector -->
+      <div id="tab-json" class="dev-tab-content" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);">RAW TELEMETRY PAYLOAD</span>
+          <button class="btn-primary" style="padding: 4px 10px; font-size: 0.75rem;" onclick="copyRawJSON()">Copy JSON</button>
+        </div>
+        <pre id="dev-raw-json" class="dev-code-block">{ "status": "initialized", "mode": "developer" }</pre>
+      </div>
+    </div>
+
+    <!-- Dev Footer -->
+    <div class="dev-footer">
+      <span style="font-size: 0.78rem; color: var(--text-muted);">Observability: <strong style="color: var(--accent-color);">Live (Port 8502)</strong></span>
+      <a href="http://localhost:8502" target="_blank" class="btn-primary" style="padding: 6px 12px; font-size: 0.8rem; text-decoration: none;">
+        Open Full Dashboard ↗
+      </a>
+    </div>
+  </aside>
+
+  <!-- Floating AI Chat Assistant -->
+  <div class="ai-assistant-widget">
+    <button class="ai-toggle-btn" onclick="toggleChat()" title="Consult FolliCare AI Trichologist">
+      🌿
+    </button>
+  </div>
+
+  <div id="chat-window" class="chat-window">
+    <div class="chat-header">
+      <div class="chat-header-title">
+        <span>🌿</span>
+        <div>
+          <div>FolliCare AI Assistant</div>
+          <div style="font-size: 0.72rem; color: var(--accent-color); font-weight: 500;">
+            Ollama Qwen 2.5 • <span id="chat-mode-indicator" style="cursor: pointer; text-decoration: underline;" onclick="toggleDevDrawer()">Customer Mode</span>
+          </div>
+        </div>
+      </div>
+      <button style="background: transparent; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem;" onclick="toggleChat()">✕</button>
+    </div>
+    <div id="chat-body" class="chat-body">
+      <div class="chat-msg agent">
+        Hello! I am your FolliCare Trichology Assistant. Ask me about hair loss, ingredient science, routine recommendations, or ask me to change the storefront theme (e.g. <em>"Switch to blue theme"</em> or <em>"Change green to red"</em>)!
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" class="chat-input" placeholder="Ask about hair science or change theme..." autocomplete="off">
+      <button id="voice-record-btn" class="voice-btn" onclick="toggleVoiceRecord()" title="Voice Input">
+        🎤
+      </button>
+      <button class="btn-primary" style="padding: 8px 14px;" onclick="sendMessage()">
+        Send
+      </button>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
+
