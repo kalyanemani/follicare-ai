@@ -99,26 +99,124 @@ export function FolliCareCopilotPopup() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      text: '👋 Hi! I am your FolliCare Copilot powered by LangGraph & CopilotKit. I can modify card sizes, update prices, switch themes, or explain trichology science!',
+      text: '👋 Hi! I am your FolliCare Copilot powered by LangGraph & CopilotKit. Ask me by voice or text to reduce card sizes, update prices, switch themes, or upload scalp photos!',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isVoiceEnabled, setIsVoiceEnabled] = useState(true);
   const [activeTab, setActiveTab] = useState('chat'); // 'chat' | 'actions' | 'state'
   const { readables, actions, executeAction, runtimeUrl } = useContext(CopilotContext);
   const { isDevMode } = useFolliCare();
   const chatEndRef = useRef(null);
+  const recognitionRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isOpen]);
 
-  const handleSend = async (e) => {
-    e?.preventDefault();
-    if (!input.trim() || isLoading) return;
+  // Initialize Web Speech API Recognition
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recog = new SpeechRecognition();
+      recog.continuous = false;
+      recog.interimResults = false;
+      recog.lang = 'en-US';
 
-    const userText = input.trim();
+      recog.onstart = () => setIsListening(true);
+      recog.onend = () => setIsListening(false);
+      recog.onerror = (e) => {
+        console.error('Speech recognition error:', e);
+        setIsListening(false);
+      };
+      recog.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          setInput(transcript);
+          sendMessage(transcript);
+        }
+      };
+      recognitionRef.current = recog;
+    }
+  }, []);
+
+  const toggleListening = () => {
+    if (!recognitionRef.current) {
+      alert('Speech recognition is not supported in this browser. Please use Chrome/Edge.');
+      return;
+    }
+    if (isListening) {
+      recognitionRef.current.stop();
+    } else {
+      recognitionRef.current.start();
+    }
+  };
+
+  const speakText = (text) => {
+    if (!isVoiceEnabled || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const cleanText = text.replace(/[*_`#]/g, '').replace(/[\u{1F600}-\u{1F64F}]/gu, '');
+    const utter = new SpeechSynthesisUtterance(cleanText);
+    utter.rate = 1.05;
+    utter.pitch = 1.0;
+    window.speechSynthesis.speak(utter);
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const base64 = reader.result;
+      const userMsg = {
+        role: 'user',
+        text: `📸 Uploaded Scalp / Hair Image (${file.name}) for Multimodal Vision diagnosis`,
+        image: base64,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages(prev => [...prev, userMsg]);
+      setIsLoading(true);
+
+      try {
+        const resp = await fetch('/api/multimodal/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            image_base64: base64,
+            prompt: 'Analyze this scalp/hair image. Identify the hair condition, texture, and recommend botanical treatments.'
+          })
+        });
+        const data = await resp.json();
+        const analysis = data.vision_analysis?.analysis || 'Visual diagnosis complete.';
+        const botReply = {
+          role: 'assistant',
+          text: `🔬 **Vision RAG Analysis (Qwen 2.5-VL)**:\n${analysis}`,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        setMessages(prev => [...prev, botReply]);
+        speakText(analysis);
+      } catch (err) {
+        setMessages(prev => [...prev, {
+          role: 'assistant',
+          text: `⚠️ Vision diagnosis failed: ${err.message}`,
+          isError: true,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        }]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const sendMessage = async (userText) => {
+    if (!userText.trim() || isLoading) return;
+
     setInput('');
     const userMsg = {
       role: 'user',
@@ -129,7 +227,6 @@ export function FolliCareCopilotPopup() {
     setIsLoading(true);
 
     try {
-      // Send message with CopilotKit readable context snapshot
       const response = await fetch(runtimeUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -145,7 +242,7 @@ export function FolliCareCopilotPopup() {
 
       const data = await response.json();
       
-      // Execute any direct CopilotKit action calls returned by backend/LLM
+      // Execute registered CopilotKit actions
       if (data.ui_commands && Array.isArray(data.ui_commands)) {
         for (const cmd of data.ui_commands) {
           const actName = cmd.action || cmd.command;
@@ -155,14 +252,16 @@ export function FolliCareCopilotPopup() {
         }
       }
 
+      const replyText = data.reply || data.reply_message || 'Action executed successfully.';
       const botReply = {
         role: 'assistant',
-        text: data.reply || data.reply_message || 'Action executed successfully.',
+        text: replyText,
         intent: data.intent,
         ui_commands: data.ui_commands,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, botReply]);
+      speakText(replyText);
     } catch (err) {
       setMessages(prev => [
         ...prev,
@@ -176,6 +275,11 @@ export function FolliCareCopilotPopup() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSend = (e) => {
+    e?.preventDefault();
+    sendMessage(input);
   };
 
   return (
@@ -444,7 +548,7 @@ export function FolliCareCopilotPopup() {
             </div>
           )}
 
-          {/* Footer Input */}
+          {/* Footer Input with Voice & Vision */}
           <form
             onSubmit={handleSend}
             style={{
@@ -452,25 +556,99 @@ export function FolliCareCopilotPopup() {
               borderTop: '1px solid rgba(255, 255, 255, 0.08)',
               background: 'rgba(0, 0, 0, 0.3)',
               display: 'flex',
+              alignItems: 'center',
               gap: '8px'
             }}
           >
+            {/* Hidden File Input for Scalp Vision */}
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleImageUpload}
+            />
+
+            {/* Scalp Vision Upload Button */}
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              title="Upload Scalp / Hair Photo for Multimodal Vision Analysis"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                color: '#60a5fa',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: '10px',
+                padding: '9px 10px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              📷
+            </button>
+
+            {/* Voice Input (Speech-to-Text) Button */}
+            <button
+              type="button"
+              onClick={toggleListening}
+              title={isListening ? 'Listening... Click to Stop' : 'Click for Voice Input'}
+              style={{
+                background: isListening ? '#ef4444' : 'rgba(255, 255, 255, 0.08)',
+                color: '#ffffff',
+                border: isListening ? '1px solid #f87171' : '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: '10px',
+                padding: '9px 10px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                animation: isListening ? 'pulse 1s infinite' : 'none',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {isListening ? '🎙️🔴' : '🎙️'}
+            </button>
+
+            {/* Voice Output (TTS) Toggle */}
+            <button
+              type="button"
+              onClick={() => setIsVoiceEnabled(!isVoiceEnabled)}
+              title={isVoiceEnabled ? 'Voice Output ON' : 'Voice Output Muted'}
+              style={{
+                background: 'transparent',
+                color: isVoiceEnabled ? 'var(--accent-color, #10b981)' : '#6b7280',
+                border: 'none',
+                padding: '6px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              {isVoiceEnabled ? '🔊' : '🔇'}
+            </button>
+
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="e.g. 'Reduce card size of rosemary oil' or 'Change price to $30'"
+              placeholder={isListening ? 'Listening to voice...' : "Voice or type (e.g. 'Reduce card size of rosemary oil')"}
               style={{
                 flex: 1,
                 padding: '10px 14px',
                 background: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
+                border: isListening ? '1px solid var(--accent-color, #10b981)' : '1px solid rgba(255, 255, 255, 0.12)',
                 borderRadius: '10px',
                 color: '#ffffff',
                 fontSize: '0.84rem',
-                outline: 'none'
+                outline: 'none',
+                transition: 'border 0.2s'
               }}
             />
+
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
@@ -479,7 +657,7 @@ export function FolliCareCopilotPopup() {
                 color: '#ffffff',
                 border: 'none',
                 borderRadius: '10px',
-                padding: '0 14px',
+                padding: '10px 14px',
                 cursor: isLoading || !input.trim() ? 'not-allowed' : 'pointer',
                 opacity: isLoading || !input.trim() ? 0.5 : 1,
                 display: 'flex',

@@ -5,8 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+    host: '127.0.0.1',
     proxy: {
-      '/api': 'http://127.0.0.1:8000'
+      '/api': 'http://127.0.0.1:8000',
+      '/copilotkit': 'http://127.0.0.1:8000',
+      '/static': 'http://127.0.0.1:8000'
     }
   }
 });
