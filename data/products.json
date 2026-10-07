@@ -1,11 +1,56 @@
 [
   {
-    "id": "prod_rosemary_scalp_oil_716",
+    "id": "prod_rosemary_scalp_oil_709",
     "name": "Rosemary Scalp Oil",
     "category": "Scalp Care",
     "hair_concern": "Hair Fall & Thinning",
     "price": 29.99,
     "original_price": 37.49,
+    "rating": 5.0,
+    "reviews_count": 1,
+    "tag": "Voice Ingested Formula",
+    "badge_color": "badge-emerald",
+    "icon": "\ud83d\udca7",
+    "in_stock": 1,
+    "description": "Custom formulated Scalp Care product crafted with active botanicals targeted for Hair Fall & Thinning.",
+    "active_ingredients": "[\"Botanical Complex\", \"Vegan Biotin\", \"Vitamin E\", \"Organic Rosemary Leaf Oil 3%\", \"Micro-Encapsulated Caffeine\"]",
+    "benefits": [
+      "Specifically formulated for Hair Fall & Thinning",
+      "Clean botanical blend, sulfate-free",
+      "Clinically tested for visible results"
+    ],
+    "clinical_result": "Formulated in accordance with clean dermatological trichology standards.",
+    "usage_instructions": "Apply to clean scalp or hair strands. Massage gently and style as desired.",
+    "specs": [
+      "Clean Beauty",
+      "Dermatologist Tested",
+      "Sulfate-Free",
+      "Voice AI Ingested"
+    ],
+    "created_at": 1791345709.4952917,
+    "updated_at": 1791345709.4952917,
+    "activeIngredients": [
+      "Botanical Complex",
+      "Vegan Biotin",
+      "Vitamin E",
+      "Organic Rosemary Leaf Oil 3%",
+      "Micro-Encapsulated Caffeine"
+    ],
+    "hairConcern": "Hair Fall & Thinning",
+    "originalPrice": 37.49,
+    "reviewsCount": 1,
+    "badgeColor": "badge-emerald",
+    "clinicalResult": "Formulated in accordance with clean dermatological trichology standards.",
+    "usageInstructions": "Apply to clean scalp or hair strands. Massage gently and style as desired.",
+    "inStock": true
+  },
+  {
+    "id": "prod_rosemary_scalp_oil_716",
+    "name": "Rosemary Scalp Oil",
+    "category": "Scalp Care",
+    "hair_concern": "Hair Fall & Thinning",
+    "price": 30.0,
+    "original_price": 37.5,
     "rating": 5.0,
     "reviews_count": 1,
     "tag": "Voice Ingested Formula",
@@ -28,7 +73,7 @@
       "Voice AI Ingested"
     ],
     "created_at": 1791310716.9132137,
-    "updated_at": 1791345372.0932908,
+    "updated_at": 1791345708.6151521,
     "activeIngredients": [
       "Botanical Complex",
       "Vegan Biotin",
@@ -37,7 +82,7 @@
       "Micro-Encapsulated Caffeine"
     ],
     "hairConcern": "Hair Fall & Thinning",
-    "originalPrice": 37.49,
+    "originalPrice": 37.5,
     "reviewsCount": 1,
     "badgeColor": "badge-emerald",
     "clinicalResult": "Formulated in accordance with clean dermatological trichology standards.",
@@ -49,8 +94,8 @@
     "name": "Rosemary Scalp Oil",
     "category": "Scalp Care",
     "hair_concern": "Hair Fall & Thinning",
-    "price": 29.99,
-    "original_price": 37.49,
+    "price": 30.0,
+    "original_price": 37.5,
     "rating": 5.0,
     "reviews_count": 1,
     "tag": "Voice Ingested Formula",
@@ -73,7 +118,7 @@
       "Voice AI Ingested"
     ],
     "created_at": 1791310781.0447328,
-    "updated_at": 1791345372.0932908,
+    "updated_at": 1791345708.6151521,
     "activeIngredients": [
       "Botanical Complex",
       "Vegan Biotin",
@@ -82,7 +127,7 @@
       "Micro-Encapsulated Caffeine"
     ],
     "hairConcern": "Hair Fall & Thinning",
-    "originalPrice": 37.49,
+    "originalPrice": 37.5,
     "reviewsCount": 1,
     "badgeColor": "badge-emerald",
     "clinicalResult": "Formulated in accordance with clean dermatological trichology standards.",
@@ -94,8 +139,8 @@
     "name": "Rosemary Scalp Oil",
     "category": "Scalp Care",
     "hair_concern": "Hair Fall & Thinning",
-    "price": 29.99,
-    "original_price": 37.49,
+    "price": 30.0,
+    "original_price": 37.5,
     "rating": 5.0,
     "reviews_count": 1,
     "tag": "Voice Ingested Formula",
@@ -118,7 +163,7 @@
       "Voice AI Ingested"
     ],
     "created_at": 1791310884.2264044,
-    "updated_at": 1791345372.0932908,
+    "updated_at": 1791345708.6151521,
     "activeIngredients": [
       "Botanical Complex",
       "Vegan Biotin",
@@ -127,7 +172,7 @@
       "Micro-Encapsulated Caffeine"
     ],
     "hairConcern": "Hair Fall & Thinning",
-    "originalPrice": 37.49,
+    "originalPrice": 37.5,
     "reviewsCount": 1,
     "badgeColor": "badge-emerald",
     "clinicalResult": "Formulated in accordance with clean dermatological trichology standards.",
@@ -139,8 +184,8 @@
     "name": "Rosemary Scalp Oil",
     "category": "Scalp Care",
     "hair_concern": "Hair Fall & Thinning",
-    "price": 29.99,
-    "original_price": 37.49,
+    "price": 30.0,
+    "original_price": 37.5,
     "rating": 5.0,
     "reviews_count": 1,
     "tag": "Voice Ingested Formula",
@@ -163,7 +208,7 @@
       "Voice AI Ingested"
     ],
     "created_at": 1791344466.150155,
-    "updated_at": 1791345372.0932908,
+    "updated_at": 1791345708.6151521,
     "activeIngredients": [
       "Botanical Complex",
       "Vegan Biotin",
@@ -172,7 +217,7 @@
       "Micro-Encapsulated Caffeine"
     ],
     "hairConcern": "Hair Fall & Thinning",
-    "originalPrice": 37.49,
+    "originalPrice": 37.5,
     "reviewsCount": 1,
     "badgeColor": "badge-emerald",
     "clinicalResult": "Formulated in accordance with clean dermatological trichology standards.",
@@ -184,8 +229,8 @@
     "name": "Rosemary Scalp Oil",
     "category": "Scalp Care",
     "hair_concern": "Hair Fall & Thinning",
-    "price": 29.99,
-    "original_price": 37.49,
+    "price": 30.0,
+    "original_price": 37.5,
     "rating": 4.9,
     "reviews_count": 1,
     "tag": "New Ingested Formula",
@@ -208,7 +253,7 @@
       "Real-Time AI Ingested"
     ],
     "created_at": 1791303921.3597088,
-    "updated_at": 1791345372.0932908,
+    "updated_at": 1791345708.6151521,
     "activeIngredients": [
       "Botanical Botanical Complex",
       "Vegan Biotin",
@@ -217,7 +262,7 @@
       "Micro-Encapsulated Caffeine"
     ],
     "hairConcern": "Hair Fall & Thinning",
-    "originalPrice": 37.49,
+    "originalPrice": 37.5,
     "reviewsCount": 1,
     "badgeColor": "badge-emerald",
     "clinicalResult": "Formulated in accordance with clean dermatological trichology standards.",

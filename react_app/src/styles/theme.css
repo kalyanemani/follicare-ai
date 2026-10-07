@@ -1,4 +1,4 @@
-:root {
+:root, [data-theme="botanical-emerald"], :root[data-theme="botanical-emerald"], body[data-theme="botanical-emerald"] {
   --bg-primary: #0a130f;
   --bg-secondary: #12211b;
   --bg-card: rgba(18, 33, 27, 0.75);
@@ -24,7 +24,7 @@
   --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 0 35px rgba(16, 185, 129, 0.25);
 }
 
-[data-theme="ruby-red"], [data-theme="crimson-red"] {
+[data-theme="ruby-red"], [data-theme="crimson-red"], :root[data-theme="ruby-red"], body[data-theme="ruby-red"] {
   --bg-primary: #180507;
   --bg-secondary: #2a0b10;
   --bg-card: rgba(45, 12, 18, 0.8);
@@ -42,7 +42,7 @@
   --hero-bg: radial-gradient(circle at top right, rgba(225, 29, 72, 0.22), transparent 60%);
 }
 
-[data-theme="ocean-blue"] {
+[data-theme="ocean-blue"], :root[data-theme="ocean-blue"], body[data-theme="ocean-blue"] {
   --bg-primary: #05101e;
   --bg-secondary: #0b1d33;
   --bg-card: rgba(15, 36, 64, 0.8);
@@ -60,7 +60,7 @@
   --hero-bg: radial-gradient(circle at top right, rgba(2, 132, 199, 0.22), transparent 60%);
 }
 
-[data-theme="rose-luxury"] {
+[data-theme="rose-luxury"], :root[data-theme="rose-luxury"], body[data-theme="rose-luxury"] {
   --bg-primary: #170912;
   --bg-secondary: #271220;
   --bg-card: rgba(43, 20, 35, 0.8);
@@ -90,6 +90,5 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
-
-// [Qwen 2.5 Coder Auto-Update]: Switched theme token to 'ruby-red' in CSS design system. (2026-10-07 09:04:26)

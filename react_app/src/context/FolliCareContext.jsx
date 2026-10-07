@@ -17,8 +17,26 @@ export function FolliCareProvider({ children }) {
   });
   const [telemetry, setTelemetry] = useState(null);
 
+  const normalizeTheme = (t) => {
+    if (!t) return 'botanical-emerald';
+    const lower = String(t).toLowerCase();
+    if (lower.includes('red') || lower.includes('ruby') || lower.includes('crimson')) return 'ruby-red';
+    if (lower.includes('blue') || lower.includes('sapphire') || lower.includes('ocean')) return 'ocean-blue';
+    if (lower.includes('pink') || lower.includes('rose')) return 'rose-luxury';
+    if (lower.includes('amber') || lower.includes('gold') || lower.includes('honey')) return 'royal-amber';
+    return 'botanical-emerald';
+  };
+
+  const handleSetTheme = (newTheme) => {
+    const normalized = normalizeTheme(newTheme);
+    setTheme(normalized);
+  };
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    document.body.setAttribute('data-theme', theme);
+    const rootEl = document.getElementById('root');
+    if (rootEl) rootEl.setAttribute('data-theme', theme);
   }, [theme]);
 
   useEffect(() => {
@@ -49,7 +67,7 @@ export function FolliCareProvider({ children }) {
 
   const updateProductPrice = (productIdentifier, newPrice) => {
     setProducts(prev => prev.map(p => {
-      const match = p.id === productIdentifier || p.name.toLowerCase().includes(productIdentifier.toLowerCase());
+      const match = p.id === productIdentifier || p.name.toLowerCase().includes(String(productIdentifier).toLowerCase());
       return match ? { ...p, price: parseFloat(newPrice) } : p;
     }));
   };
@@ -57,33 +75,40 @@ export function FolliCareProvider({ children }) {
   const updateCardStyle = (target, styleConfig) => {
     setCardStyles(prev => ({
       ...prev,
-      [target.toLowerCase()]: {
-        ...prev[target.toLowerCase()],
+      [String(target).toLowerCase()]: {
+        ...prev[String(target).toLowerCase()],
         ...styleConfig
       }
     }));
   };
 
   const executeUICommand = (cmd) => {
-    const action = cmd.action;
-    const payload = cmd.payload || {};
-    if (action === 'SET_THEME') {
-      setTheme(cmd.theme || payload.theme);
+    if (!cmd) return;
+    const action = cmd.action || cmd.command;
+    const payload = cmd.payload || cmd;
+
+    if (action === 'SET_THEME' || action === 'UPDATE_THEME') {
+      const targetTheme = payload.theme || payload.themeName || cmd.theme;
+      if (targetTheme) handleSetTheme(targetTheme);
     } else if (action === 'SET_BANNER') {
       setActiveBanner({
-        message: cmd.message || payload.message,
-        code: cmd.code || payload.code
+        message: payload.message || cmd.message || activeBanner.message,
+        code: payload.code || cmd.code || activeBanner.code
       });
     } else if (action === 'UPDATE_HERO') {
       setHeroContent({
-        title: cmd.title || payload.title || heroContent.title,
-        subtitle: cmd.subtitle || payload.subtitle || heroContent.subtitle
+        title: payload.title || cmd.title || heroContent.title,
+        subtitle: payload.subtitle || cmd.subtitle || heroContent.subtitle
       });
     } else if (action === 'ADD_TO_CART') {
-      const pName = cmd.productName || payload.productName;
-      const qty = cmd.quantity || payload.quantity || 1;
+      const pName = payload.productName || cmd.productName;
+      const qty = payload.quantity || cmd.quantity || 1;
       const matched = products.find(p => p.name.toLowerCase().includes((pName || '').toLowerCase()));
-      if (matched) addToCart(matched, qty);
+      if (matched) {
+        addToCart(matched, qty);
+      } else if (products.length > 0) {
+        addToCart(products[0], qty);
+      }
     } else if (action === 'UPDATE_PRODUCT_PRICE') {
       const pName = payload.productName || cmd.productName;
       const nPrice = payload.newPrice || cmd.newPrice;

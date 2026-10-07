@@ -242,9 +242,10 @@ export function FolliCareCopilotPopup() {
 
       const data = await response.json();
       
-      // Execute registered CopilotKit actions
+      // Execute registered CopilotKit actions and trigger live React Context mutations
       if (data.ui_commands && Array.isArray(data.ui_commands)) {
         for (const cmd of data.ui_commands) {
+          if (executeUICommand) executeUICommand(cmd);
           const actName = cmd.action || cmd.command;
           if (actions[actName]) {
             await executeAction(actName, cmd.payload || cmd);
