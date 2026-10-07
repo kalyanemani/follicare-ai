@@ -42,6 +42,24 @@ export function FolliCareProvider({ children }) {
 
   const removeFromCart = (id) => {
     setCart(prev => prev.filter(item => item.id !== id));
+  const [cardStyles, setCardStyles] = useState({});
+  const [activeProduct, setActiveProduct] = useState(null);
+
+  const updateProductPrice = (productIdentifier, newPrice) => {
+    setProducts(prev => prev.map(p => {
+      const match = p.id === productIdentifier || p.name.toLowerCase().includes(productIdentifier.toLowerCase());
+      return match ? { ...p, price: parseFloat(newPrice) } : p;
+    }));
+  };
+
+  const updateCardStyle = (target, styleConfig) => {
+    setCardStyles(prev => ({
+      ...prev,
+      [target.toLowerCase()]: {
+        ...prev[target.toLowerCase()],
+        ...styleConfig
+      }
+    }));
   };
 
   const executeUICommand = (cmd) => {
@@ -64,6 +82,13 @@ export function FolliCareProvider({ children }) {
       const qty = cmd.quantity || payload.quantity || 1;
       const matched = products.find(p => p.name.toLowerCase().includes((pName || '').toLowerCase()));
       if (matched) addToCart(matched, qty);
+    } else if (action === 'UPDATE_PRODUCT_PRICE') {
+      const pName = payload.productName || cmd.productName;
+      const nPrice = payload.newPrice || cmd.newPrice;
+      if (pName && nPrice) updateProductPrice(pName, nPrice);
+    } else if (action === 'UPDATE_CARD_STYLE') {
+      const target = payload.target || cmd.target || 'all';
+      updateCardStyle(target, payload);
     }
   };
 
@@ -72,7 +97,9 @@ export function FolliCareProvider({ children }) {
       theme, setTheme,
       cart, addToCart, removeFromCart,
       isDevMode, setIsDevMode,
-      products, setProducts,
+      products, setProducts, updateProductPrice,
+      cardStyles, updateCardStyle,
+      activeProduct, setActiveProduct,
       activeBanner, setActiveBanner,
       heroContent, setHeroContent,
       telemetry, setTelemetry,

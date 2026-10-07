@@ -47,6 +47,8 @@ class ChatRequest(BaseModel):
     message: str
     input_type: Optional[str] = "text" # "text" or "voice"
     mode: Optional[str] = "customer" # "customer" or "developer"
+    dev_mode: Optional[bool] = False
+    copilot_context: Optional[Dict[str, Any]] = None
     model_name: Optional[str] = "qwen2.5:3b"
     session_id: Optional[str] = "default_user"
 
@@ -232,6 +234,57 @@ async def mcp_git_sync(request: Request):
     })
     data = json.loads(res["content"][0]["text"])
     return JSONResponse(content=data)
+
+@app.post("/copilotkit")
+@app.post("/api/copilotkit")
+async def copilotkit_runtime_endpoint(request: Request):
+    """
+    CopilotKit Runtime Bridge:
+    Synchronizes CopilotKit React state (useCopilotReadable, useCopilotAction)
+    with FolliCare LangGraph multi-agent engine and local Ollama models.
+    """
+    body = await request.json()
+    query = body.get("message") or body.get("prompt") or ""
+    session_id = body.get("session_id", "copilotkit_session")
+    mode = body.get("mode", "customer")
+    copilot_ctx = body.get("copilot_context", {})
+
+    result = supervisor.process(
+        query=query,
+        input_type="text",
+        mode=mode,
+        session_id=session_id
+    )
+
+    # Format response for CopilotKit actions
+    ui_commands = result.get("ui_commands") or []
+    action_calls = []
+    for cmd in ui_commands:
+        action_calls.append({
+            "action": cmd.get("action") or cmd.get("command"),
+            "parameters": cmd.get("payload") or cmd
+        })
+
+    return JSONResponse(content={
+        "status": "success",
+        "reply": result.get("reply") or result.get("reply_message"),
+        "ui_commands": ui_commands,
+        "action_calls": action_calls,
+        "intent": result.get("intent"),
+        "trace_id": result.get("trace_id"),
+        "path_detected": result.get("path_detected")
+    })
+
+@app.get("/copilotkit/info")
+def copilotkit_info():
+    return {
+        "status": "ready",
+        "framework": "CopilotKit (React 18 + LangGraph CoAgents)",
+        "supported_actions": [
+            "resizeCard", "updatePrice", "changeStoreTheme", "filterCatalogByConcern", "addToCart"
+        ],
+        "local_models": supervisor.llm_client.available_models
+    }
 
 @app.get("/api/agents/info")
 def get_agents_info():
