@@ -42,6 +42,8 @@ export function FolliCareProvider({ children }) {
 
   const removeFromCart = (id) => {
     setCart(prev => prev.filter(item => item.id !== id));
+  };
+
   const [cardStyles, setCardStyles] = useState({});
   const [activeProduct, setActiveProduct] = useState(null);
 
