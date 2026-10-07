@@ -109,7 +109,7 @@ export function FolliCareCopilotPopup() {
   const [isVoiceEnabled, setIsVoiceEnabled] = useState(true);
   const [activeTab, setActiveTab] = useState('chat'); // 'chat' | 'actions' | 'state'
   const { readables, actions, executeAction, runtimeUrl } = useContext(CopilotContext);
-  const { isDevMode } = useFolliCare();
+  const { isDevMode, executeUICommand } = useFolliCare();
   const chatEndRef = useRef(null);
   const recognitionRef = useRef(null);
   const fileInputRef = useRef(null);
