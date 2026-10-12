@@ -23,3 +23,6 @@ htmlcov/
 node_modules/
 dist/
 .vite/
+
+# Scratch & Temporary
+scratch/
